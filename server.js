@@ -148,7 +148,9 @@ app.post('/callback', (req, res) => {
 
 app.get('/status/:id', (req, res) => {
   const tx = transactions[req.params.id];
-  if (!tx) return res.json({ status: 'unknown' });
+  if (!tx) {
+    return res.json({ status: 'pending', resultCode: '0' }); 
+  }
   if (tx.status === 'success') {
     return res.json({
       status: 'success',
